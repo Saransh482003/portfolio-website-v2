@@ -3,14 +3,14 @@
 import React from "react";
 import { ArrowUpRight, Play, Sparkles, Zap } from "lucide-react";
 import { HIGHLIGHTS, PROFILE } from "@/data/architectureData";
-import HeroTelemetry from "./HeroTelemetry";
+import RagnerPlaycard from "./RagnerPlaycard";
 
 interface HeroSectionProps {
   onOpenLoom: () => void;
   onNotify?: (msg: string) => void;
 }
 
-export default function HeroSection({ onOpenLoom, onNotify }: HeroSectionProps) {
+export default function HeroSection({ onOpenLoom }: HeroSectionProps) {
   return (
     <section className="pt-14 pb-20 md:pt-20 md:pb-28">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
@@ -87,9 +87,9 @@ export default function HeroSection({ onOpenLoom, onNotify }: HeroSectionProps) 
           </div>
         </div>
 
-        {/* Right Column (Hero Telemetry Console) */}
+        {/* Right Column: RAGner Flagship Showcase Playcard */}
         <div className="lg:col-span-5">
-          <HeroTelemetry onNotify={onNotify} />
+          <RagnerPlaycard onOpenLoom={onOpenLoom} />
         </div>
       </div>
 

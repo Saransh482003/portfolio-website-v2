@@ -344,6 +344,11 @@ export const EXPERIENCE = [
     active: true,
     description:
       "Graduate specialization in Artificial Intelligence at NTU CCDS, focusing on scalable retrieval architectures, deep learning, and multimodal computer vision.",
+    skills: ["Advanced AI", "Multimodal Retrieval", "Large Vision Models", "Deep Learning Research"],
+    highlights: [
+      "Specializing in distributed retrieval & foundation models at one of Asia's top computing colleges",
+      "Research direction centered on low-latency inference and hierarchical graph-based synthesis",
+    ],
   },
   {
     period: "Jun 2025 – Feb 2026",
@@ -354,6 +359,12 @@ export const EXPERIENCE = [
     active: false,
     description:
       "Architected production GraphRAG (Neo4j) and RAPTOR hierarchical retrieval pipelines for clinical knowledge synthesis; engineered and benchmarked PyTorch/OpenCV vision models for cardiovascular imaging.",
+    skills: ["Neo4j GraphRAG", "RAPTOR Trees", "PyTorch Vision", "FastAPI", "Clinical SOPs"],
+    highlights: [
+      "Built deterministic RAPTOR + Neo4j GraphRAG pipeline for medical research literature",
+      "Benchmarked automated cardiovascular tissue contraction kinematics using PyTorch & OpenCV",
+      "Designed zero-hallucination citation checks over dense oncology trial protocols",
+    ],
   },
   {
     period: "Jan 2025 – May 2026",
@@ -364,6 +375,11 @@ export const EXPERIENCE = [
     active: false,
     description:
       "Mentored undergraduate cohorts in production software engineering, full-stack architecture (Flask, Vue.js, Docker, Celery, Redis), automated testing, and system design.",
+    skills: ["System Design", "Docker CI/CD", "Flask & Redis", "Automated Testing", "Code Reviews"],
+    highlights: [
+      "Guided students through production full-stack engineering, async task queues, and Docker setups",
+      "Evaluated term projects and conducted architectural code reviews for scalable web backends",
+    ],
   },
   {
     period: "Graduated May 2026",
@@ -374,6 +390,11 @@ export const EXPERIENCE = [
     active: false,
     description:
       "Completed 4-year BS in Data Science & Applications at IIT Madras alongside a BSc in Data Analytics at DSEU. Placed 2nd Runner-Up nationally at the BharatGen 2025 Hackathon.",
+    skills: ["Data Science", "Machine Learning", "Statistical Modeling", "Edge AI", "Algorithms"],
+    highlights: [
+      "Placed 2nd Runner-Up nationally at BharatGen 2025 Hackathon for CureCue multimodal assistant",
+      "Dual degree rigor across IIT Madras BS curriculum and DSEU analytics degree",
+    ],
   },
 ];
 
