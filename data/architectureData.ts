@@ -17,6 +17,7 @@ export interface CaseStudy {
   number: string;
   title: string;
   category: string;
+  domainTag: "rag" | "vision" | "agents" | "all";
   badge: string;
   summary: string;
   metrics: string[];
@@ -24,10 +25,35 @@ export interface CaseStudy {
   architecture: string;
   impact: string;
   stack: string[];
+  flowSteps?: { step: string; title: string; desc: string }[];
   primaryUrl?: string;
   primaryLabel?: string;
   hasVideoWalkthrough?: boolean;
   sandboxes?: { name: string; domain: string; url: string }[];
+}
+
+export interface FreelanceService {
+  id: string;
+  number: string;
+  title: string;
+  tagline: string;
+  deliverables: string[];
+  idealFor: string;
+  turnaround: string;
+  badge: string;
+}
+
+export interface EngagementStep {
+  step: string;
+  title: string;
+  timeline: string;
+  description: string;
+}
+
+export interface SkillCategory {
+  category: string;
+  icon: string;
+  skills: { name: string; level: string; note: string }[];
 }
 
 export interface EngineeringNote {
@@ -124,6 +150,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: "ragner",
     number: "01",
     category: "Flagship Enterprise Retrieval System",
+    domainTag: "rag",
     title: "RAGner — Tri-Modal Agentic Retrieval Workspace",
     badge: "Live Production",
     summary:
@@ -143,6 +170,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     impact:
       "Eliminated cross-annex hallucinations on complex long-form PDFs and shipped isolated multi-tenant B2B sandboxes with strict page-level citation grounding.",
     stack: ["Python", "FastAPI", "Next.js", "Qdrant", "RAPTOR", "Neo4j", "Docker"],
+    flowSteps: [
+      { step: "01", title: "Hierarchical Chunking", desc: "PDF structure parsing & table retention into structured text chunks" },
+      { step: "02", title: "Tri-Modal Indexing", desc: "Dense/BM25 in Qdrant, recursive tree in RAPTOR, & entity graph in Neo4j" },
+      { step: "03", title: "Deterministic Routing", desc: "Intent classifier routes pinpoint, thematic, or multi-hop queries" },
+      { step: "04", title: "Page-Grounding", desc: "Reciprocal rank fusion with strict page & paragraph citations" },
+    ],
     sandboxes: [
       {
         name: "Neuralix",
@@ -170,6 +203,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: "htic-clinical",
     number: "02",
     category: "Biomedical AI · HTIC, IIT Madras Research Park",
+    domainTag: "rag",
     title: "Clinical Knowledge Synthesis & Cardiovascular Vision",
     badge: "R&D Production",
     summary:
@@ -186,11 +220,18 @@ export const CASE_STUDIES: CaseStudy[] = [
     impact:
       "Delivered citation-locked clinical literature synthesis and reproducible quantitative computer vision benchmarks for healthcare researchers at HTIC.",
     stack: ["PyTorch", "OpenCV", "Neo4j GraphRAG", "RAPTOR", "LangChain", "Python"],
+    flowSteps: [
+      { step: "01", title: "Corpus Ingestion", desc: "Extraction of trial protocols, PubMed literature, & SOP guidelines" },
+      { step: "02", title: "Biomedical Graph", desc: "Neo4j ontology linking biomarkers, drug contraindications, & endpoints" },
+      { step: "03", title: "Vision Pipeline", desc: "PyTorch tracking of cardiac tissue contraction kinematics" },
+      { step: "04", title: "Clinical Audit", desc: "Zero-hallucination citation checks against verified medical literature" },
+    ],
   },
   {
     id: "assistive-nav",
     number: "03",
     category: "Multimodal Edge Computer Vision",
+    domainTag: "vision",
     title: "Real-Time Assistive Indoor Navigation Engine",
     badge: "Edge Verified",
     summary:
@@ -209,11 +250,18 @@ export const CASE_STUDIES: CaseStudy[] = [
     impact:
       "Achieved real-time obstacle prioritization and directional auditory guidance in low-light indoor environments with zero cloud dependency.",
     stack: ["YOLOv8", "Monocular Depth", "OpenCV (CLAHE)", "Piper TTS", "Python"],
+    flowSteps: [
+      { step: "01", title: "Sensor Ingestion", desc: "Low-light camera feed pre-processed with CLAHE in LAB color space" },
+      { step: "02", title: "Spatial Inference", desc: "YOLOv8 obstacle detection synchronized with Depth Anything v2" },
+      { step: "03", title: "Hazard Matrix", desc: "Deterministic priority queue ranking obstacles by collision hazard score" },
+      { step: "04", title: "Edge TTS Alerts", desc: "Sub-100ms directional audio cues generated fully offline via Piper" },
+    ],
   },
   {
     id: "curecue-tasim",
     number: "04",
     category: "Applied Multimodal Systems",
+    domainTag: "agents",
     title: "CureCue (BharatGen '25 Winner) & TA-Sim Evaluator",
     badge: "2nd Runner-Up · National",
     summary:
@@ -232,6 +280,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     impact:
       "Recognized nationally at the BharatGen 2025 Hackathon; automated multi-turn oral technical evaluations grounded in course rubrics.",
     stack: ["YOLOv8", "Gemini 2.0 Flash", "Next.js", "Flask", "ChromaDB", "Ollama"],
+    flowSteps: [
+      { step: "01", title: "Multimodal Inputs", desc: "Speech audio streams and offline camera pill identification" },
+      { step: "02", title: "Local Retrieval", desc: "ChromaDB course syllabus vector store & patient prescription tables" },
+      { step: "03", title: "Grounded LLM", desc: "Llama 3 local inference with zero data leakage to external clouds" },
+      { step: "04", title: "Dynamic Scorecard", desc: "Real-time rubrics evaluation and conversational voice feedback" },
+    ],
   },
 ];
 
@@ -320,5 +374,138 @@ export const EXPERIENCE = [
     active: false,
     description:
       "Completed 4-year BS in Data Science & Applications at IIT Madras alongside a BSc in Data Analytics at DSEU. Placed 2nd Runner-Up nationally at the BharatGen 2025 Hackathon.",
+  },
+];
+
+export const FREELANCE_SERVICES: FreelanceService[] = [
+  {
+    id: "rag-systems",
+    number: "01",
+    title: "Enterprise RAG & GraphRAG Pipelines",
+    tagline: "End-to-end deterministic retrieval over complex documents (100+ page contracts, clinical trials, technical manuals).",
+    badge: "Most Requested",
+    idealFor: "B2B SaaS, LegalTech, MedTech, and Enterprise Knowledge Bases",
+    turnaround: "2 – 3 Weeks",
+    deliverables: [
+      "Custom Tri-Modal Routing (Vector + RAPTOR Trees + Neo4j GraphRAG)",
+      "Reciprocal Rank Fusion (RRF) with BM25 sparse + dense embeddings",
+      "Strict page-level citation & zero-hallucination verification hooks",
+      "Benchmark test suite with latency, recall, and precision telemetry",
+      "Dockerized FastAPI microservice with streaming response endpoints",
+    ],
+  },
+  {
+    id: "vision-edge",
+    number: "02",
+    title: "Computer Vision & Multimodal Edge AI",
+    tagline: "Sub-100ms real-time object detection, spatial awareness, and video stream analytics.",
+    badge: "Low-Latency",
+    idealFor: "Robotics, Assistive Tech, Industrial Automation, and MedTech Imaging",
+    turnaround: "2 – 4 Weeks",
+    deliverables: [
+      "Custom YOLOv8 fine-tuning & spatial depth fusion (Depth Anything v2)",
+      "Low-light image enhancement (LAB-space CLAHE normalization)",
+      "Edge-optimized inference (TensorRT, ONNX, or PyTorch on local hardware)",
+      "Deterministic spatial hazard matrix & offline audio/alert synthesis",
+      "Zero-cloud fallback architecture for private on-premise deployments",
+    ],
+  },
+  {
+    id: "ai-audit",
+    number: "03",
+    title: "AI Architecture Audit & Performance Tuning",
+    tagline: "Diagnosing flaky agent loops, reducing token bloat by 40%+, and fixing retrieval failures.",
+    badge: "High-ROI",
+    idealFor: "Startups & Engineering Teams with struggling AI prototypes",
+    turnaround: "5 – 7 Days",
+    deliverables: [
+      "Deep-dive audit of chunking strategies, embeddings, and context window leaks",
+      "Eliminating brittle ReAct agent loops with deterministic intent routers",
+      "Profiling retrieval latency & vector index memory footprint",
+      "Executive architecture blueprint with prioritized remediation roadmap",
+      "1-on-1 engineering handover call & team architecture walkthrough",
+    ],
+  },
+];
+
+export const ENGAGEMENT_STEPS: EngagementStep[] = [
+  {
+    step: "01",
+    title: "Corpus & Needs Discovery",
+    timeline: "Days 1 – 3",
+    description:
+      "Deep dive into your document corpus, query failure modes, accuracy requirements, and latency targets. No generic templates.",
+  },
+  {
+    step: "02",
+    title: "Architecture Blueprint",
+    timeline: "Days 4 – 7",
+    description:
+      "Design deterministic routing paths, chunking strategies, vector & graph schemas, and synthetic benchmark evaluation datasets.",
+  },
+  {
+    step: "03",
+    title: "Iterative Build & Benchmarks",
+    timeline: "Week 2",
+    description:
+      "Engineered with daily async Loom updates, git commits, quantitative telemetry (recall@k, latency), and isolated test sandboxes.",
+  },
+  {
+    step: "04",
+    title: "Production Handover & CI/CD",
+    timeline: "Week 3",
+    description:
+      "Dockerized microservices, comprehensive API documentation, CI/CD pipelines, and dedicated post-deployment support.",
+  },
+];
+
+export const TECH_STACK_MATRIX: SkillCategory[] = [
+  {
+    category: "Retrieval & Graph Intelligence",
+    icon: "Database",
+    skills: [
+      { name: "Qdrant Vector DB", level: "Production", note: "Hybrid dense & sparse BM25 indexing" },
+      { name: "Neo4j GraphRAG", level: "Production", note: "Multi-hop knowledge graph ontologies" },
+      { name: "RAPTOR Trees", level: "Production", note: "Recursive K-Means document clustering" },
+      { name: "RRF Re-Ranking", level: "Production", note: "Reciprocal rank fusion scoring" },
+      { name: "ChromaDB", level: "Proficient", note: "Local embedded vector stores" },
+      { name: "LangChain & LlamaIndex", level: "Proficient", note: "Pipeline orchestration & loaders" },
+    ],
+  },
+  {
+    category: "Machine Learning & Vision",
+    icon: "Cpu",
+    skills: [
+      { name: "PyTorch", level: "Production", note: "Deep learning models & kinematics" },
+      { name: "YOLOv8 & Detection", level: "Production", note: "Real-time edge object classification" },
+      { name: "Depth Anything v2", level: "Production", note: "Monocular relative depth estimation" },
+      { name: "OpenCV (CLAHE)", level: "Production", note: "LAB color space image enhancement" },
+      { name: "Hugging Face Transformers", level: "Proficient", note: "Fine-tuning & local model deployment" },
+      { name: "Ollama & Local LLMs", level: "Production", note: "Llama 3 / Mistral offline inference" },
+    ],
+  },
+  {
+    category: "Backend & Systems Infrastructure",
+    icon: "Terminal",
+    skills: [
+      { name: "FastAPI", level: "Production", note: "High-throughput async Python APIs" },
+      { name: "Docker & Containerization", level: "Production", note: "Multi-stage production images" },
+      { name: "Python 3.11 / 3.12", level: "Expert", note: "Type-hinted, tested, async backend core" },
+      { name: "Linux & Bash", level: "Production", note: "Server management & GPU environment setup" },
+      { name: "Redis & Celery", level: "Proficient", note: "Task queues & caching layers" },
+      { name: "Piper TTS & Edge Audio", level: "Proficient", note: "Sub-50ms offline voice synthesis" },
+    ],
+  },
+  {
+    category: "Full-Stack & Product Engineering",
+    icon: "Layers",
+    skills: [
+      { name: "Next.js & React 19", level: "Production", note: "Server components & high-performance UI" },
+      { name: "TypeScript", level: "Production", note: "Strict type safety across full stack" },
+      { name: "Tailwind CSS", level: "Expert", note: "Modern responsive interfaces & animations" },
+      { name: "REST & WebSockets", level: "Production", note: "Real-time streaming agent protocols" },
+      { name: "Vercel & Cloud Deploy", level: "Production", note: "Global CDN & edge routing" },
+      { name: "Git & Collaborative CI/CD", level: "Expert", note: "Clean commits & PR automation" },
+    ],
   },
 ];
